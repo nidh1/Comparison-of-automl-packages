@@ -21,7 +21,7 @@ import mlflow.sklearn
 mlflow.start_run()
 mlflow.end_run()
 # In[1]:
-
+mlflow.start_run(run_name = "Pycaret")
 
 #opening zip file which contains contains the csv file
 import shutil
@@ -328,11 +328,11 @@ mlflow.start_run(run_name = "tpot")
 # In[36]:
 
 
-#from tpot import TPOTRegressor
-#from sklearn.model_selection import RepeatedKFold
-#cv = RepeatedKFold(n_splits=10, random_state=1)
-#tpot = TPOTRegressor(generations=5,population_size=5,scoring='r2',cv=cv,verbosity=2,random_state=1,n_jobs=-1)
-#tpot.fit(train.drop(["% Silica Concentrate_mean","date"],axis=1),train['% Silica Concentrate_mean'])
+from tpot import TPOTRegressor
+from sklearn.model_selection import RepeatedKFold
+cv = RepeatedKFold(n_splits=10, random_state=1)
+tpot = TPOTRegressor(generations=5,population_size=5,scoring='r2',cv=cv,verbosity=2,random_state=1,n_jobs=-1)
+tpot.fit(train.drop(["% Silica Concentrate_mean","date"],axis=1),train['% Silica Concentrate_mean'])
 
 
 # 3)Then export the best pipeline code into a python file, no internet connection required.
@@ -340,7 +340,7 @@ mlflow.start_run(run_name = "tpot")
 # In[ ]:
 
 
-#tpot.export('tpot_flotation_best_model.py')
+tpot.export('tpot_flotation_best_model.py')
 
 
 # In[50]:
