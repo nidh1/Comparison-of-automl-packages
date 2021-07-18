@@ -1,0 +1,1 @@
+[{"run_id": "739ed62840b344738c60c363183f96cc", "artifact_path": "stackendsemble_using_h2o", "utc_time_created": "2021-07-18 19:09:42.393705", "flavors": {"python_function": {"loader_module": "mlflow.h2o", "python_version": "3.8.8", "data": "model.h2o", "env": "conda.yaml"}, "h2o": {"h2o_version": "3.32.1.4", "data": "model.h2o"}}}]

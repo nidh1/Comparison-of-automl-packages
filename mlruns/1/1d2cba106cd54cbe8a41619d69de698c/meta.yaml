@@ -1,0 +1,15 @@
+artifact_uri: file:///C:/Users/Hp/comparison_automl/mlruns/1/1d2cba106cd54cbe8a41619d69de698c/artifacts
+end_time: 1626633437240
+entry_point_name: ''
+experiment_id: '1'
+lifecycle_stage: active
+name: ''
+run_id: 1d2cba106cd54cbe8a41619d69de698c
+run_uuid: 1d2cba106cd54cbe8a41619d69de698c
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1626632501135
+status: 3
+tags: []
+user_id: Hp

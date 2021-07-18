@@ -1,0 +1,13 @@
+artifact_path: lgbm_using_pycaret
+flavors:
+  python_function:
+    env: conda.yaml
+    loader_module: mlflow.sklearn
+    model_path: model.pkl
+    python_version: 3.8.8
+  sklearn:
+    pickled_model: model.pkl
+    serialization_format: cloudpickle
+    sklearn_version: 0.23.2
+run_id: d62ef54d6a6f429a8c01e36edb88735e
+utc_time_created: '2021-07-18 19:51:58.730571'

@@ -1,0 +1,12 @@
+artifact_path: stackendsemble_using_h2o
+flavors:
+  h2o:
+    data: model.h2o
+    h2o_version: 3.32.1.4
+  python_function:
+    data: model.h2o
+    env: conda.yaml
+    loader_module: mlflow.h2o
+    python_version: 3.8.8
+run_id: 09df21a519624bb3bd0a155cb7e8531c
+utc_time_created: '2021-07-18 21:10:04.960588'
