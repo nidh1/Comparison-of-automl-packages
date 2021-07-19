@@ -330,8 +330,8 @@ mlflow.start_run(run_name = "tpot")
 
 from tpot import TPOTRegressor
 from sklearn.model_selection import RepeatedKFold
-cv = RepeatedKFold(n_splits=2, random_state=1)
-tpot = TPOTRegressor(generations=0,population_size=1,scoring='r2',cv=cv,verbosity=2,random_state=1,n_jobs=-1)
+cv = RepeatedKFold(n_splits=10, random_state=1)
+tpot = TPOTRegressor(generations=5,population_size=5,scoring='r2',cv=cv,verbosity=2,random_state=1,n_jobs=-1)
 tpot.fit(train.drop(["% Silica Concentrate_mean","date"],axis=1),train['% Silica Concentrate_mean'])
 
 
@@ -619,7 +619,7 @@ mlflow.log_artifact('model_correlation.jpeg')
 # In[106]:
 
 
-#exm = aml.explain(test1)
+exm = aml.explain(test1)
 
 
 # In[90]:
