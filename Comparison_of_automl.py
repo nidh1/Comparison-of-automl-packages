@@ -368,7 +368,7 @@ rsq_train = tpot._optimized_pipeline_score
 # In[61]:
 
 
-mlflow.log_metrics({'rsq_train':rsq_train, 'rsq_test':model.score(test.drop(["% Silica Concentrate_mean","date"],axis=1),test['% Silica Concentrate_mean'])})
+mlflow.log_metrics({'rsq_train':rsq_train, 'rsq_test':tpot.score(test.drop(["% Silica Concentrate_mean","date"],axis=1),test['% Silica Concentrate_mean'])})
 
 
 # In[65]:
