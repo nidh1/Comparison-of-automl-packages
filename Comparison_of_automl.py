@@ -330,8 +330,8 @@ mlflow.start_run(run_name = "tpot")
 
 from tpot import TPOTRegressor
 from sklearn.model_selection import RepeatedKFold
-cv = RepeatedKFold(n_splits=10, random_state=1)
-tpot = TPOTRegressor(generations=5,population_size=5,scoring='r2',cv=cv,verbosity=2,random_state=1,n_jobs=-1)
+cv = RepeatedKFold(n_splits=2, random_state=1)
+tpot = TPOTRegressor(generations=0,population_size=1,scoring='r2',cv=cv,verbosity=2,random_state=1,n_jobs=-1)
 tpot.fit(train.drop(["% Silica Concentrate_mean","date"],axis=1),train['% Silica Concentrate_mean'])
 
 
@@ -345,24 +345,6 @@ tpot.export('tpot_flotation_best_model.py')
 
 # In[50]:
 
-
-import numpy as np
-import pandas as pd
-from sklearn.ensemble import GradientBoostingRegressor
-from sklearn.linear_model import ElasticNetCV
-from sklearn.model_selection import train_test_split
-from sklearn.pipeline import make_pipeline, make_union
-from tpot.builtins import StackingEstimator
-from tpot.export_utils import set_param_recursive
-exported_pipeline = make_pipeline(
-    StackingEstimator(estimator=GradientBoostingRegressor(alpha=0.75, learning_rate=0.1, loss="quantile", max_depth=9, max_features=0.35000000000000003, min_samples_leaf=10, min_samples_split=11, n_estimators=100, subsample=0.8500000000000001)),
-    ElasticNetCV(l1_ratio=1.0, tol=0.01)
-)
-# Fix random state for all the steps in exported pipeline
-set_param_recursive(exported_pipeline.steps, 'random_state', 1)
-
-
-model=exported_pipeline.fit(train.drop(["% Silica Concentrate_mean","date"],axis=1),train['% Silica Concentrate_mean'])
 
 
 # In[56]:
@@ -379,17 +361,22 @@ rsq_train = cross_val_score(exported_pipeline,train.drop(["% Silica Concentrate_
 
 model.score(test.drop(["% Silica Concentrate_mean","date"],axis=1),test['% Silica Concentrate_mean'])
 
+sklearn_pipeline = tpot.fitted_pipeline_
+
+from sklearn.model_selection import cross_val_score
+rsq_train = tpot._optimized_pipeline_score
+
 
 # In[61]:
 
 
-mlflow.log_metrics({'rsq_train':0.7645, 'rsq_test':model.score(test.drop(["% Silica Concentrate_mean","date"],axis=1),test['% Silica Concentrate_mean'])})
+mlflow.log_metrics({'rsq_train':rsq_train, 'rsq_test':model.score(test.drop(["% Silica Concentrate_mean","date"],axis=1),test['% Silica Concentrate_mean'])})
 
 
 # In[65]:
 
 
-predict = model.predict(test.drop(["% Silica Concentrate_mean","date"],axis=1))
+predict = sklearn_pipeline.predict(test.drop(["% Silica Concentrate_mean","date"],axis=1))
 
 
 # In[69]:
@@ -409,7 +396,7 @@ fig.write_html("gbr.html")
 # In[70]:
 
 
-mlflow.sklearn.log_model(model,"gbr_using_tpot")
+mlflow.sklearn.log_model(sklearn_pipeline,"gbr_using_tpot")
 
 
 # In[71]:
