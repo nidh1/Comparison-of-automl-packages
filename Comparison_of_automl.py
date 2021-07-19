@@ -454,7 +454,7 @@ mlflow.start_run(run_name="h2o")
 
 
 import h2o
-h2o.init()
+h2o.init(ip="127.0.0.1", port="8080")
 
 
 # 3)When we click on that link we will go to the h2o flow page, no internet required.
