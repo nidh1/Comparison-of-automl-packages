@@ -350,8 +350,6 @@ tpot.export('tpot_flotation_best_model.py')
 # In[56]:
 
 
-from sklearn.model_selection import cross_val_score
-rsq_train = cross_val_score(exported_pipeline,train.drop(["% Silica Concentrate_mean","date"],axis=1),train['% Silica Concentrate_mean'],scoring='r2').mean()
 
 
 # 4)r^2 value can be found out using the following command
@@ -621,7 +619,7 @@ mlflow.log_artifact('model_correlation.jpeg')
 # In[106]:
 
 
-exm = aml.explain(test1)
+#exm = aml.explain(test1)
 
 
 # In[90]:
