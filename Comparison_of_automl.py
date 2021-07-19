@@ -357,7 +357,7 @@ tpot.export('tpot_flotation_best_model.py')
 # In[60]:
 
 
-model.score(test.drop(["% Silica Concentrate_mean","date"],axis=1),test['% Silica Concentrate_mean'])
+tpot.score(test.drop(["% Silica Concentrate_mean","date"],axis=1),test['% Silica Concentrate_mean'])
 
 sklearn_pipeline = tpot.fitted_pipeline_
 
